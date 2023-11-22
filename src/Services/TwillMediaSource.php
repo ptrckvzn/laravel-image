@@ -5,21 +5,21 @@ namespace A17\Twill\Image\Services;
 use A17\Twill\Models\Block;
 use A17\Twill\Models\Media;
 use A17\Twill\Models\Model;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\App;
-use Illuminate\Contracts\Support\Arrayable;
 use A17\Twill\Image\Exceptions\ImageException;
 use A17\Twill\Services\MediaLibrary\ImageServiceInterface;
+use A17\Twill\Image\Services\Interfaces\MediaSource;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Arr;
 
-class MediaSource implements Arrayable
+class TwillMediaSource implements MediaSource
 {
-    public const AUTO_WIDTHS_RATIO = 2.5;
+    protected const AUTO_WIDTHS_RATIO = 2.5;
 
-    public const DEFAULT_WIDTH = 1000;
+    protected const DEFAULT_WIDTH = 1000;
 
-    public const FORMAT_WEBP = 'webp';
+    protected const FORMAT_WEBP = 'webp';
 
-    public const CROP_KEYS = ['crop_x', 'crop_y', 'crop_w', 'crop_h'];
+    protected const CROP_KEYS = ['crop_x', 'crop_y', 'crop_w', 'crop_h'];
 
     protected $model;
 
@@ -52,10 +52,11 @@ class MediaSource implements Arrayable
 
         $this->role = $role;
         $this->media = $media;
-        $this->service = $this->setService($service);
+
+        $this->setService($service);
     }
 
-    public function generate($crop = null, $width = null, $height = null, $srcSetWidths = [])
+    public function generate($crop = null, $width = null, $height = null, $srcSetWidths = []): object
     {
         $this->setCrop($crop);
         $this->setImageArray();
@@ -76,14 +77,15 @@ class MediaSource implements Arrayable
         $this->model = $object;
     }
 
-    protected function setService($service)
+    public function setService($service)
     {
         if (isset($service) && is_string($service) && class_exists($service)) {
-            return App::make($service);
+            $this->service =  App::make($service);
         } elseif (isset($service) && is_object($service)) {
-            return $service;
+            $this->service = $service;
+        } else {
+            $this->service = app('imageService');
         }
-        return app('imageService');
     }
 
     /**

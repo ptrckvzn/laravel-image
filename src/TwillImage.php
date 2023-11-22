@@ -2,24 +2,29 @@
 
 namespace A17\Twill\Image;
 
-use A17\Twill\Models\Block;
-use A17\Twill\Models\Media;
-use A17\Twill\Models\Model;
 use A17\Twill\Image\Models\Image;
-use A17\Twill\Image\Models\StaticImage;
 use A17\Twill\Image\ViewModels\ImageViewModel;
 
 class TwillImage
 {
     /**
-     * @param object|Model|Block $object
+     * @param object $object
      * @param string $role
-     * @param null|Media $media
+     * @param null $media
      * @return Image
      */
-    public function make($object, $role, $media = null)
+    public function make($object, $role, $media = null, $service = null)
     {
-        return new Image($object, $role, $media);
+        $mediaSourceClass = config('twill-image.media_source_class');
+
+        $source = new $mediaSourceClass(
+            $object,
+            $role,
+            $media,
+            $service
+        );
+
+        return new Image($source);
     }
 
     /**

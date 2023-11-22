@@ -2,32 +2,15 @@
 
 namespace A17\Twill\Image\Models;
 
-use A17\Twill\Models\Media;
-use A17\Twill\Models\Model;
+use A17\Twill\Image\Services\Interfaces\MediaSource;
 use A17\Twill\Image\Facades\TwillImage;
-use A17\Twill\Image\Services\MediaSource;
 use A17\Twill\Image\Services\ImageColumns;
-use Illuminate\Contracts\Support\Arrayable;
 use A17\Twill\Image\Exceptions\ImageException;
 use A17\Twill\Services\MediaLibrary\ImageServiceInterface;
+use Illuminate\Contracts\Support\Arrayable;
 
 class Image implements Arrayable
 {
-    /**
-     * @var object|Model The model the media belongs to
-     */
-    protected $object;
-
-    /**
-     * @var string The media role
-     */
-    protected $role;
-
-    /**
-     * @var null|Media Media object
-     */
-    protected $media;
-
     /**
      * @var string The media crop
      */
@@ -64,38 +47,18 @@ class Image implements Arrayable
     protected $service;
 
     /**
-     * @param object|Model $object
+     * @param MediaSource $object
      * @param string $role
-     * @param null|Media $media
      */
-    public function __construct($object, $role, $media = null)
+    public function __construct(MediaSource $object)
     {
-        $this->object = $object;
-
-        $this->role = $role;
-
-        $this->media = $media;
+        $this->mediaSource = $object;
 
         $columnsServiceClass = config('twill-image.columns_class', ImageColumns::class);
 
         if ($columnsServiceClass::shouldInstantiateService()) {
             $this->columnsService = new $columnsServiceClass();
         }
-    }
-
-    /**
-     * @return MediaSource
-     */
-    private function mediaSourceService()
-    {
-        return isset($this->mediaSourceService)
-            ? $this->mediaSourceService
-            : $this->mediaSourceService = new MediaSource(
-                $this->object,
-                $this->role,
-                $this->media,
-                $this->service,
-            );
     }
 
     /**
@@ -248,7 +211,7 @@ class Image implements Arrayable
                 "mediaQuery" => isset($source['columns'])
                     ? $this->mediaQueryColumns($source['columns'])
                     : $source['media_query'] ?? $source['mediaQuery'],
-                "image" => $this->mediaSourceService()->generate(
+                "image" => $this->mediaSource->generate(
                     $source['crop'],
                     $source['width'] ?? null,
                     $source['height'] ?? null,
@@ -273,7 +236,7 @@ class Image implements Arrayable
     public function toArray()
     {
         $arr = [
-            "image" => $this->mediaSourceService()->generate(
+            "image" => $this->mediaSource->generate(
                 $this->crop,
                 $this->width,
                 $this->height,
