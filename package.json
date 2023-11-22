@@ -1,5 +1,5 @@
 {
-  "name": "@area17/twill-image",
+  "name": "@area17/laravel-image",
   "version": "1.0.3",
   "description": "Image module for Twill.",
   "main": "dist/index.js",
