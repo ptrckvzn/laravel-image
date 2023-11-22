@@ -2,7 +2,7 @@ import { createIntersectionObserver } from './intersectionObserver'
 import debounce from './debounce'
 import Wrapper from './Wrapper'
 
-class TwillImage {
+class LaravelImage {
   constructor() {
     this.reset = debounce(this._reset, 100).bind(this)
 
@@ -10,7 +10,7 @@ class TwillImage {
   }
 
   get images() {
-    return document.querySelectorAll('[data-twill-image-wrapper]')
+    return document.querySelectorAll('[data-laravel-image-wrapper]')
   }
 
   start() {
@@ -37,4 +37,4 @@ class TwillImage {
   }
 }
 
-export default TwillImage
+export default LaravelImage

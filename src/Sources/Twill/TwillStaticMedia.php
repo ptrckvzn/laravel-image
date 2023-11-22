@@ -1,11 +1,11 @@
 <?php
 
-namespace A17\Twill\Image\Sources\Twill;
+namespace A17\LaravelImage\Sources\Twill;
 
-use A17\Twill\Image\Exceptions\ImageException;
-use A17\Twill\Image\Sources\Interfaces\MediaSource;
-use A17\Twill\Image\Sources\Interfaces\Source;
-use A17\Twill\Image\Sources\Twill\Models\TwillStaticModel;
+use A17\LaravelImage\Exceptions\ImageException;
+use A17\LaravelImage\Sources\Interfaces\MediaSource;
+use A17\LaravelImage\Sources\Interfaces\Source;
+use A17\LaravelImage\Sources\Twill\Models\TwillStaticModel;
 
 class TwillStaticMedia implements Source
 {
@@ -15,7 +15,7 @@ class TwillStaticMedia implements Source
     {
         $object = self::makeFromSrc($args);
 
-        return TwillMedia::make($object, self::$role, null, \A17\Twill\Image\Sources\Glide::class);
+        return TwillMedia::make($object, self::$role, null, \A17\LaravelImage\Sources\Glide::class);
     }
 
     private static function makeFromSrc($args)
@@ -58,8 +58,8 @@ class TwillStaticMedia implements Source
     {
         if (is_array($preset)) {
             return $preset;
-        } elseif (config()->has("twill-image.presets.$preset")) {
-            return config("twill-image.presets.$preset");
+        } elseif (config()->has("laravel-image.presets.$preset")) {
+            return config("laravel-image.presets.$preset");
         } else {
             return [];
         }

@@ -1,8 +1,8 @@
 <?php
 
-namespace A17\Twill\Image\Sources\Twill\Http\Controllers;
+namespace A17\LaravelImage\Sources\Twill\Http\Controllers;
 
-use A17\Twill\Image\Sources\Twill\Services\TwillGlide;
+use A17\LaravelImage\Sources\Twill\Services\TwillGlide;
 use Illuminate\Foundation\Application;
 
 class GlideController

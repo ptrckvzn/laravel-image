@@ -6,7 +6,7 @@ $shouldLoad = $shouldLoad ?? true;
         @isset($sources)
             @foreach($sources as $source)
                 <source
-                    @if(isset($source['type']) && config('twill-image.webp_support'))
+                    @if(isset($source['type']) && config('laravel-image.webp_support'))
                         type="{{ $source['type'] }}"
                     @endif
                     @if(isset($source['mediaQuery']))
@@ -22,7 +22,7 @@ $shouldLoad = $shouldLoad ?? true;
             @endforeach
         @endisset
 
-        @include('twill-image::image', [
+        @include('laravel-image::image', [
             'src' => $fallback,
         ])
     </picture>
@@ -31,14 +31,14 @@ $shouldLoad = $shouldLoad ?? true;
     $source = $sources[0];
     @endphp
 
-    @include('twill-image::image', [
+    @include('laravel-image::image', [
         'src' => $fallback,
-        'type' => isset($source['type']) && config('twill-image.webp_support') ? $source['type'] : null,
+        'type' => isset($source['type']) && config('laravel-image.webp_support') ? $source['type'] : null,
         'media' => isset($source['mediaQuery']) ? $source['mediaQuery'] : null,
         'srcSet' => $source['srcset'],
     ])
 @else
-    @include('twill-image::image', [
+    @include('laravel-image::image', [
         'src' => $fallback,
     ])
 @endif

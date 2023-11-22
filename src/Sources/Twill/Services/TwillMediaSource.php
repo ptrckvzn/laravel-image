@@ -1,9 +1,9 @@
 <?php
 
-namespace A17\Twill\Image\Sources\Twill\Services;
+namespace A17\LaravelImage\Sources\Twill\Services;
 
-use A17\Twill\Image\Exceptions\ImageException;
-use A17\Twill\Image\Sources\Interfaces\MediaSource;
+use A17\LaravelImage\Exceptions\ImageException;
+use A17\LaravelImage\Sources\Interfaces\MediaSource;
 use A17\Twill\Models\Block;
 use A17\Twill\Models\Media;
 use A17\Twill\Models\Model;
@@ -324,7 +324,7 @@ class TwillMediaSource implements MediaSource
             "src" => $this->src(),
             "srcSet" => $this->srcSet(),
             "width" => $this->width(),
-        ], (config('twill-image.webp_support') ? [
+        ], (config('laravel-image.webp_support') ? [
             "srcWebp" => $this->srcWebp(),
             "srcSetWebp" => $this->srcSetWebp(),
         ] : []));

@@ -1,11 +1,11 @@
 <?php
 
-namespace A17\Twill\Image\Models;
+namespace A17\LaravelImage\Models;
 
-use A17\Twill\Image\Exceptions\ImageException;
-use A17\Twill\Image\Facades\TwillImage;
-use A17\Twill\Image\Services\ImageColumns;
-use A17\Twill\Image\Sources\Interfaces\MediaSource;
+use A17\LaravelImage\Exceptions\ImageException;
+use A17\LaravelImage\Facades\LaravelImage;
+use A17\LaravelImage\Services\ImageColumns;
+use A17\LaravelImage\Sources\Interfaces\MediaSource;
 use Illuminate\Contracts\Support\Arrayable;
 
 class Image implements Arrayable
@@ -48,7 +48,7 @@ class Image implements Arrayable
     {
         $this->mediaSource = $object;
 
-        $columnsServiceClass = config('twill-image.columns_class', ImageColumns::class);
+        $columnsServiceClass = config('laravel-image.columns_class', ImageColumns::class);
 
         if ($columnsServiceClass::shouldInstantiateService()) {
             $this->columnsService = new $columnsServiceClass();
@@ -65,8 +65,8 @@ class Image implements Arrayable
     {
         if (is_array($preset)) {
             $this->applyPreset($preset);
-        } elseif (config()->has("twill-image.presets.$preset")) {
-            $this->applyPreset(config("twill-image.presets.$preset"));
+        } elseif (config()->has("laravel-image.presets.$preset")) {
+            $this->applyPreset(config("laravel-image.presets.$preset"));
         } else {
             throw new ImageException("Invalid preset value. Preset must be an array or a string corresponding to an image preset key in the configuration file.");
         }
@@ -210,7 +210,7 @@ class Image implements Arrayable
      */
     public function render($overrides = [])
     {
-        return TwillImage::render($this, $overrides);
+        return LaravelImage::render($this, $overrides);
     }
 
     public function toArray()

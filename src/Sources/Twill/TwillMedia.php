@@ -1,10 +1,10 @@
 <?php
 
-namespace A17\Twill\Image\Sources\Twill;
+namespace A17\LaravelImage\Sources\Twill;
 
-use A17\Twill\Image\Sources\Interfaces\MediaSource;
-use A17\Twill\Image\Sources\Interfaces\Source;
-use A17\Twill\Image\Sources\Twill\Services\TwillMediaSource;
+use A17\LaravelImage\Sources\Interfaces\MediaSource;
+use A17\LaravelImage\Sources\Interfaces\Source;
+use A17\LaravelImage\Sources\Twill\Services\TwillMediaSource;
 
 class TwillMedia implements Source
 {

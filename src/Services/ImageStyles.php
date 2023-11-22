@@ -1,8 +1,8 @@
 <?php
 
-namespace A17\Twill\Image\Services;
+namespace A17\LaravelImage\Services;
 
-use A17\Twill\Image\ViewModels\ImageViewModel;
+use A17\LaravelImage\ViewModels\ImageViewModel;
 
 class ImageStyles
 {
@@ -144,7 +144,7 @@ class ImageStyles
             $this->baseStyle,
         );
 
-        $style['opacity'] = (config('twill-image.js') && $loading === 'lazy') ? 0 : 1;
+        $style['opacity'] = (config('laravel-image.js') && $loading === 'lazy') ? 0 : 1;
 
         return $this->implodeStyles($style);
     }

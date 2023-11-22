@@ -1,9 +1,9 @@
 <div
     class="{{$wrapperClasses}}"
     style="{{$wrapperStyle}}"
-    data-twill-image-wrapper
+    data-laravel-image-wrapper
 >
-    @include('twill-image::sizer')
-    @include('twill-image::placeholder')
-    @include('twill-image::main-image')
+    @include('laravel-image::sizer')
+    @include('laravel-image::placeholder')
+    @include('laravel-image::main-image')
 </div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace A17\Twill\Image\Services\Interfaces;
+namespace A17\LaravelImage\Services\Interfaces;
 
 interface ImageColumns
 {

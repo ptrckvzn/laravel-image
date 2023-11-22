@@ -2,7 +2,7 @@
 $attributes = 'aria-hidden="true" data-placeholder-image';
 @endphp
 @if(isset($placeholderSrc) && !!$placeholderSrc)
-  @include('twill-image::picture', [
+  @include('laravel-image::picture', [
       'fallback' => $placeholderSrc,
       'alt' => "",
       'attributes' => $attributes,

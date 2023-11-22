@@ -1,6 +1,6 @@
 <?php
 
-namespace A17\Twill\Image\Sources\Interfaces;
+namespace A17\LaravelImage\Sources\Interfaces;
 
 interface Source
 {

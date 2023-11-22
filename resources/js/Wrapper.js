@@ -28,12 +28,12 @@ class Wrapper {
     this.cacheKey = JSON.stringify(this.main.src || this.main.dataset.src)
     this.revealed = false
 
-    this.main.dispatchEvent(new CustomEvent('twill-image:start'));
+    this.main.dispatchEvent(new CustomEvent('laravel-image:start'));
 
     this.main.onload = (e) => {
       this.load(e.currentTarget)
 
-      this.main.dispatchEvent(new CustomEvent('twill-image:loaded'));
+      this.main.dispatchEvent(new CustomEvent('laravel-image:loaded'));
     }
 
     if (this.isLoading) {
@@ -100,7 +100,7 @@ class Wrapper {
 
     this.revealed = true
 
-    this.main.dispatchEvent(new CustomEvent('twill-image:revealed'));
+    this.main.dispatchEvent(new CustomEvent('laravel-image:revealed'));
   }
 
   load(target) {

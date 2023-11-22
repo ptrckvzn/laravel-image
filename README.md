@@ -47,17 +47,17 @@ Twill Image is a package designed to work with [Twill](https://twill.io) to disp
 Install the package to your existing Twill project with Composer.
 
 ```
-composer require area17/twill-image
+composer require area17/laravel-image
 ```
 
 ### Configuration file
 
 The configuration file contains a few general settings and this is where you can define preset for your images.
 
-Publish `config/twill-image.php` to your app's config folder.
+Publish `config/laravel-image.php` to your app's config folder.
 
 ```bash
-php artisan vendor:publish --provider="A17\Twill\Image\TwillImageServiceProvider" --tag=config
+php artisan vendor:publish --provider="A17\LaravelImage\TwillImageServiceProvider" --tag=config
 ```
 
 ### JavaScript module
@@ -65,7 +65,7 @@ php artisan vendor:publish --provider="A17\Twill\Image\TwillImageServiceProvider
 You can import the JavaScript module and initialize the lazy loading class in your application.
 
 ```js
-import { TwillImage } from '../../vendor/area17/twill-image'
+import { TwillImage } from '../../vendor/area17/laravel-image'
 
 document.addEventListener('DOMContentLoaded', function () {
   const lazyloading = new TwillImage()
@@ -78,16 +78,16 @@ When adding or refreshing content of a page without a reload, you can trigger a 
 document.addEventListener('page:updated', () => lazyloading.reset());
 ```
 
-If you prefer to use a pre-compiled version of the JavaScrip module, you can publish a script `twill-image.js` to your app's public folder and add a `<script>` tag to your project.
+If you prefer to use a pre-compiled version of the JavaScrip module, you can publish a script `laravel-image.js` to your app's public folder and add a `<script>` tag to your project.
 
 ```bash
-php artisan vendor:publish --provider="A17\Twill\Image\TwillImageServiceProvider" --tag=js
+php artisan vendor:publish --provider="A17\LaravelImage\TwillImageServiceProvider" --tag=js
 ```
 
 In a Blade file.
 
 ```php
-<script src="{{ asset('/twill-image.js') }}"></script>
+<script src="{{ asset('/laravel-image.js') }}"></script>
 ```
 
 The JavaScript module is not required. If you prefer to rely only on the browser's native `loading` attribute, set the [`js` config option](#list-of-options) to `false`.
@@ -100,7 +100,7 @@ The JavaScript module is not required. If you prefer to rely only on the browser
 The `Image` model allows you to interact fluently with a media object.
 
 ```php
-$image = new A17\Twill\Image\Models\Image($object, $role, $media);
+$image = new A17\LaravelImage\Models\Image($object, $role, $media);
 
 // or using the Facade
 $image = TwillImage::make($object, $role, $media);
@@ -221,10 +221,10 @@ $image->srcSetWidths([100, 150, 300, 600, 1200, 2000, 2400, 3600, 5000]);
 
 ##### `preset`
 
-With this method you can use an object to pass a value to any of the above methods. You can also add a preset key to the config `config/twill-image.php` and pass the name to this method.
+With this method you can use an object to pass a value to any of the above methods. You can also add a preset key to the config `config/laravel-image.php` and pass the name to this method.
 
 ```php
-// config/twill-image.php
+// config/laravel-image.php
 
 return [
     // ...
@@ -376,7 +376,7 @@ $listingImage = TwillImage::make($item, 'preview_image')->crop('listing');
 ## Configuration
 
 
-In `config/twill-image.php`, you can define general options and image presets. A preset informs the `Image::preset` method which crop to output along other options like responsive sources.
+In `config/laravel-image.php`, you can define general options and image presets. A preset informs the `Image::preset` method which crop to output along other options like responsive sources.
 
 ```php
 <?php
@@ -449,7 +449,7 @@ $image = TwillImage::make($page, 'preview')->preset('art_directed');
 It will output the image element with the class applied to the container.
 
 ```html
-<div class="twill-image-wrapper art-directed">...</div>
+<div class="laravel-image-wrapper art-directed">...</div>
 ```
 
 Define styles for each breakpoint.
@@ -479,7 +479,7 @@ This example assumes that you have the provided `frontend.config.json` in your a
 #### `columns` preset
 
 ```php
-// config/twill-image.php
+// config/laravel-image.php
 
 return [
     // ...
@@ -543,16 +543,16 @@ The image source and fallback would have these `sizes` and `media` attributes (t
 You can provide your own custom class to be used instead of the one provided. You can create your own service and provide the class name in the config file:
 
 ```php
-// config/twill-image.php
+// config/laravel-image.php
 
     // ...
-    // default to: A17\Twill\Image\Services\ImageColumns::class
+    // default to: A17\LaravelImage\Services\ImageColumns::class
    'columns_class' => MyApp\Services\MyOwnImageColumnsService::class,
 
 ];
 ```
 
-The service must implement the interface `A17\Twill\Image\Services\Interfaces\ImageColumns`.
+The service must implement the interface `A17\LaravelImage\Services\Interfaces\ImageColumns`.
 
 
 This can also be useful if you simply need to override some of the proprties that are defined in the provided services.

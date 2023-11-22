@@ -1,9 +1,9 @@
 <?php
 
-namespace A17\Twill\Image\Services;
+namespace A17\LaravelImage\Services;
 
 use Illuminate\Support\Arr;
-use A17\Twill\Image\Services\Interfaces\ImageColumns as ImageColumnsInterface;
+use A17\LaravelImage\Services\Interfaces\ImageColumns as ImageColumnsInterface;
 
 class ImageColumns implements ImageColumnsInterface
 {

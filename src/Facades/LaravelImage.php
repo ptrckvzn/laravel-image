@@ -1,13 +1,13 @@
 <?php
 
-namespace A17\Twill\Image\Facades;
+namespace A17\LaravelImage\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class TwillImage extends Facade
+class LaravelImage extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'twill.image';
+        return 'laravel-image';
     }
 }

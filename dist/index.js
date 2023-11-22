@@ -114,12 +114,12 @@ class Wrapper {
     this.cacheKey = JSON.stringify(this.main.src || this.main.dataset.src);
     this.revealed = false;
 
-    this.main.dispatchEvent(new CustomEvent('twill-image:start'));
+    this.main.dispatchEvent(new CustomEvent('laravel-image:start'));
 
     this.main.onload = (e) => {
       this.load(e.currentTarget);
 
-      this.main.dispatchEvent(new CustomEvent('twill-image:loaded'));
+      this.main.dispatchEvent(new CustomEvent('laravel-image:loaded'));
     };
 
     if (this.isLoading) {
@@ -186,7 +186,7 @@ class Wrapper {
 
     this.revealed = true;
 
-    this.main.dispatchEvent(new CustomEvent('twill-image:revealed'));
+    this.main.dispatchEvent(new CustomEvent('laravel-image:revealed'));
   }
 
   load(target) {
@@ -215,7 +215,7 @@ class Wrapper {
   }
 }
 
-class TwillImage {
+class LaravelImage {
   constructor() {
     this.reset = debounce(this._reset, 100).bind(this);
 
@@ -223,7 +223,7 @@ class TwillImage {
   }
 
   get images() {
-    return document.querySelectorAll('[data-twill-image-wrapper]')
+    return document.querySelectorAll('[data-laravel-image-wrapper]')
   }
 
   start() {
@@ -250,4 +250,4 @@ class TwillImage {
   }
 }
 
-exports.TwillImage = TwillImage;
+exports.LaravelImage = LaravelImage;

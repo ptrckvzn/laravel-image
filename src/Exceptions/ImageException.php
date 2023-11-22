@@ -1,6 +1,6 @@
 <?php
 
-namespace A17\Twill\Image\Exceptions;
+namespace A17\LaravelImage\Exceptions;
 
 use Exception;
 

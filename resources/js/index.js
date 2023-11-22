@@ -1,1 +1,1 @@
-export { default as TwillImage } from './TwillImage'
+export { default as LaravelImage } from './LaravelImage'

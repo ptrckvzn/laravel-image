@@ -90,7 +90,7 @@ return [
     | `sizes` and `media`.
     |
     */
-    'columns_class' => A17\Twill\Image\Services\ImageColumns::class,
+    'columns_class' => A17\LaravelImage\Services\ImageColumns::class,
 
     /*
     |--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 <?php
 
-namespace A17\Twill\Image\Sources\Twill\Models;
+namespace A17\LaravelImage\Sources\Twill\Models;
 
 use A17\Twill\Models\Behaviors\HasMedias;
 use A17\Twill\Models\Model;
@@ -61,7 +61,7 @@ class TwillStaticModel extends Model
     private function getInputSize($uuid)
     {
         $file_path = implode('/', [
-            rtrim(config('twill-image.static_local_path'), '/'),
+            rtrim(config('laravel-image.static_local_path'), '/'),
             ltrim($uuid, '/'),
         ]);
 

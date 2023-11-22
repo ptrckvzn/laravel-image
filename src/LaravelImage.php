@@ -1,12 +1,12 @@
 <?php
 
-namespace A17\Twill\Image;
+namespace A17\LaravelImage;
 
-use A17\Twill\Image\Models\Image;
-use A17\Twill\Image\Sources\Interfaces\MediaSource;
-use A17\Twill\Image\ViewModels\ImageViewModel;
+use A17\LaravelImage\Models\Image;
+use A17\LaravelImage\Sources\Interfaces\MediaSource;
+use A17\LaravelImage\ViewModels\ImageViewModel;
 
-class TwillImage
+class LaravelImage
 {
     /**
      * @param object $object
@@ -28,6 +28,6 @@ class TwillImage
     {
         $viewModel = new ImageViewModel($data, $overrides);
 
-        return view('twill-image::wrapper', $viewModel);
+        return view('laravel-image::wrapper', $viewModel);
     }
 }

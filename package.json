@@ -4,7 +4,7 @@
   "description": "Image module for Twill.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
-  "browser": "dist/twill-image.js",
+  "browser": "dist/laravel-image.js",
   "sideEffects": false,
   "scripts": {
     "build": "rollup -c rollup.config.js",
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/area17/twill-image.git"
+    "url": "git+https://github.com/area17/laravel-image.git"
   },
   "author": "",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/area17/twill-image/issues"
+    "url": "https://github.com/area17/laravel-image/issues"
   },
-  "homepage": "https://github.com/area17/twill-image#readme",
+  "homepage": "https://github.com/area17/laravel-image#readme",
   "devDependencies": {
     "eslint": "^7.25.0",
     "eslint-config-prettier": "^8.3.0",

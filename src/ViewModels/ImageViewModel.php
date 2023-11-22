@@ -1,10 +1,10 @@
 <?php
 
-namespace A17\Twill\Image\ViewModels;
+namespace A17\LaravelImage\ViewModels;
 
 use Spatie\ViewModels\ViewModel;
-use A17\Twill\Image\Models\Image;
-use A17\Twill\Image\Services\ImageStyles;
+use A17\LaravelImage\Models\Image;
+use A17\LaravelImage\Services\ImageStyles;
 use Illuminate\Contracts\Support\Arrayable;
 
 class ImageViewModel extends ViewModel implements Arrayable
@@ -143,7 +143,7 @@ class ImageViewModel extends ViewModel implements Arrayable
     {
         $this->backgroundColor
             = $overrides['backgroundColor']
-            ?? config('twill-image.background_color')
+            ?? config('laravel-image.background_color')
             ?? 'transparent';
 
         $this->layout
@@ -155,7 +155,7 @@ class ImageViewModel extends ViewModel implements Arrayable
 
         $this->lqip
             = $overrides['lqip']
-            ?? config('twill-image.lqip')
+            ?? config('laravel-image.lqip')
             ?? true;
 
         $this->sizes
@@ -203,7 +203,7 @@ class ImageViewModel extends ViewModel implements Arrayable
                 $mediaQuery = $source['mediaQuery'];
                 $image = $source['image'];
 
-                if (config('twill-image.webp_support')) {
+                if (config('laravel-image.webp_support')) {
                     $sources[] = $this->buildSourceObject(
                         $image['srcSetWebp'],
                         $image['aspectRatio'],
@@ -223,7 +223,7 @@ class ImageViewModel extends ViewModel implements Arrayable
 
         $image = $this->data['image'];
 
-        if (config('twill-image.webp_support')) {
+        if (config('laravel-image.webp_support')) {
             $sources[] = $this->buildSourceObject(
                 $image['srcSetWebp'],
                 $image['aspectRatio'],
@@ -302,10 +302,10 @@ class ImageViewModel extends ViewModel implements Arrayable
     protected function wrapperClasses()
     {
         $layout = $this->layout;
-        $classes = 'twill-image-wrapper';
+        $classes = 'laravel-image-wrapper';
 
         if ($layout === self::LAYOUT_CONSTRAINED) {
-            $classes = 'twill-image-wrapper twill-image-wrapper-constrained';
+            $classes = 'laravel-image-wrapper laravel-image-wrapper-constrained';
         }
 
         if (isset($this->wrapperClass)) {

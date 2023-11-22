@@ -23,16 +23,16 @@
   "extra": {
     "laravel": {
       "providers": [
-        "A17\\Twill\\Image\\TwillImageServiceProvider"
+        "A17\\LaravelImage\\LaravelImageServiceProvider"
       ],
       "aliases": {
-        "TwillImage": "A17\\Twill\\Image\\Facades\\TwillImage"
+        "LaravelImage": "A17\\LaravelImage\\Facades\\LaravelImage"
       }
     }
   },
   "autoload": {
     "psr-4": {
-      "A17\\Twill\\Image\\": "src/"
+      "A17\\LaravelImage\\": "src/"
     }
   },
   "require-dev": {
