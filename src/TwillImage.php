@@ -3,7 +3,7 @@
 namespace A17\Twill\Image;
 
 use A17\Twill\Image\Models\Image;
-use A17\Twill\Image\Services\Interfaces\MediaSource;
+use A17\Twill\Image\Sources\Interfaces\MediaSource;
 use A17\Twill\Image\ViewModels\ImageViewModel;
 
 class TwillImage

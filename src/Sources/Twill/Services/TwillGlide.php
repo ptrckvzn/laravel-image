@@ -1,13 +1,13 @@
 <?php
 
-namespace A17\Twill\Image\Services;
+namespace A17\Twill\Image\Sources\Twill\Services;
 
-use A17\Twill\Services\MediaLibrary\Glide as TwillGlide;
+use A17\Twill\Services\MediaLibrary\Glide;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 
-class Glide extends TwillGlide
+class TwillGlide extends Glide
 {
     public function __construct(Config $config, Application $app, Request $request)
     {

@@ -1,11 +1,13 @@
 <?php
 
-namespace A17\Twill\Image\Sources;
+namespace A17\Twill\Image\Sources\Twill;
 
-use A17\Twill\Image\Services\Interfaces\MediaSource;
 use A17\Twill\Image\Exceptions\ImageException;
+use A17\Twill\Image\Sources\Interfaces\MediaSource;
+use A17\Twill\Image\Sources\Interfaces\Source;
+use A17\Twill\Image\Sources\Twill\Models\TwillStaticModel;
 
-class TwillStaticMedia
+class TwillStaticMedia implements Source
 {
     public static $role = 'static-image';
 
@@ -13,10 +15,10 @@ class TwillStaticMedia
     {
         $object = self::makeFromSrc($args);
 
-        return TwillMedia::make($object, self::$role, null, \A17\Twill\Image\Services\Glide::class);
+        return TwillMedia::make($object, self::$role, null, \A17\Twill\Image\Sources\Glide::class);
     }
 
-    public static function makeFromSrc($args)
+    private static function makeFromSrc($args)
     {
         $model = TwillStaticModel::make();
 

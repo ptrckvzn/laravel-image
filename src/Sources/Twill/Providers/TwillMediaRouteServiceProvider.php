@@ -1,16 +1,23 @@
 <?php
 
-namespace A17\Twill\Image\Providers;
+namespace A17\Twill\Image\Sources\Twill\Providers;
 
-use Illuminate\Routing\Router;
-use A17\Twill\Image\Http\Controllers\GlideController;
+use A17\Twill\Image\Sources\Twill\Http\Controllers\GlideController;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Routing\Router;
 
-class RouteServiceProvider extends ServiceProvider
+class TwillMediaRouteServiceProvider extends ServiceProvider
 {
     public function boot()
     {
         parent::boot();
+
+        if (config('twill-image.static_image_support')) {
+            Relation::enforceMorphMap([
+                'staticImages' => 'A17\Twill\Image\Sources\Twill\Models\TwillStaticModel',
+            ]);
+        }
     }
 
     /**

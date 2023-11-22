@@ -2,11 +2,10 @@
 
 namespace A17\Twill\Image\Models;
 
-use A17\Twill\Image\Services\Interfaces\MediaSource;
+use A17\Twill\Image\Exceptions\ImageException;
 use A17\Twill\Image\Facades\TwillImage;
 use A17\Twill\Image\Services\ImageColumns;
-use A17\Twill\Image\Exceptions\ImageException;
-use A17\Twill\Services\MediaLibrary\ImageServiceInterface;
+use A17\Twill\Image\Sources\Interfaces\MediaSource;
 use Illuminate\Contracts\Support\Arrayable;
 
 class Image implements Arrayable
@@ -40,11 +39,6 @@ class Image implements Arrayable
      * @var int[] Widths list used to generate the srcset attribute
      */
     protected $srcSetWidths = [];
-
-    /**
-     * @var string|ImageServiceInterface ImageService instance or class name
-     */
-    protected $service;
 
     /**
      * @param MediaSource $object
@@ -175,20 +169,6 @@ class Image implements Arrayable
     }
 
     /**
-     * Set the ImageService to use instead of the one provided
-     * by the service container
-     *
-     * @param array $service
-     * @return $this
-     */
-    public function service($service)
-    {
-        $this->service = $service;
-
-        return $this;
-    }
-
-    /**
      * Set alternative sources for the media.
      *
      * @param array $sources
@@ -281,10 +261,6 @@ class Image implements Arrayable
 
         if (isset($preset['srcSetWidths'])) {
             $this->srcSetWidths($preset['srcSetWidths']);
-        }
-
-        if (isset($preset['service'])) {
-            $this->service($preset['service']);
         }
     }
 }

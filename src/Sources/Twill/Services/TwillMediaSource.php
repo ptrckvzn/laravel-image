@@ -1,9 +1,9 @@
 <?php
 
-namespace A17\Twill\Image\Services\Twill;
+namespace A17\Twill\Image\Sources\Twill\Services;
 
 use A17\Twill\Image\Exceptions\ImageException;
-use A17\Twill\Image\Services\Interfaces\MediaSource;
+use A17\Twill\Image\Sources\Interfaces\MediaSource;
 use A17\Twill\Models\Block;
 use A17\Twill\Models\Media;
 use A17\Twill\Models\Model;

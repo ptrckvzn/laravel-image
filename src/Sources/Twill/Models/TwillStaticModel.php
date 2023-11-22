@@ -1,6 +1,6 @@
 <?php
 
-namespace A17\Twill\Image\Sources;
+namespace A17\Twill\Image\Sources\Twill\Models;
 
 use A17\Twill\Models\Behaviors\HasMedias;
 use A17\Twill\Models\Model;

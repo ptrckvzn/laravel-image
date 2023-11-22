@@ -2,8 +2,8 @@
 
 namespace A17\Twill\Image;
 
+use A17\Twill\Image\Sources\Twill\TwillMediaRouteServiceProvider;
 use Illuminate\Support\ServiceProvider;
-use A17\Twill\Image\Providers\RouteServiceProvider;
 
 class TwillImageServiceProvider extends ServiceProvider
 {
@@ -22,8 +22,6 @@ class TwillImageServiceProvider extends ServiceProvider
             __DIR__ . '/../config/twill-image.php',
             'twill-image',
         );
-
-        $this->app->register(RouteServiceProvider::class);
     }
 
     /**
