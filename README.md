@@ -1,9 +1,9 @@
-# Twill Image
+# Laravel Image
 
-Twill Image is a package designed to work with [Twill](https://twill.io) to display responsive images easily on your site. It leverages Twill's image processing capabilities and adds modern lazy-loading techniques. It supports responsive images, art direction and fixed width images.
+Laravel Image is a package designed to display responsive images easily on your site. It adds modern lazy-loading techniques. It supports responsive images, art direction and fixed width images.
 
 - `<picture>` with multiple `<source>` elements
-- Twill's low-quality placeholder (LQIP)
+- Low-quality placeholder (LQIP)
 - Background-color placeholder
 - Art direction (multiple crops)
 - WebP and JPEG support
@@ -42,12 +42,21 @@ Twill Image is a package designed to work with [Twill](https://twill.io) to disp
 - [Art directed images](#art-directed-images)
 - [Multiple medias](#multiple-medias)
 
-## Installation
+## Installation with Twill
 
 Install the package to your existing Twill project with Composer.
 
 ```
 composer require area17/laravel-image
+```
+
+In your `config/app.php`, add a providers if you are planning to use static image with Twill.
+
+```php
+   'providers' => [
+        // ...
+        A17\LaravelImage\Sources\Twill\Providers\TwillMediaServiceProvider::class,
+    ],
 ```
 
 ### Configuration file
@@ -57,7 +66,7 @@ The configuration file contains a few general settings and this is where you can
 Publish `config/laravel-image.php` to your app's config folder.
 
 ```bash
-php artisan vendor:publish --provider="A17\LaravelImage\TwillImageServiceProvider" --tag=config
+php artisan vendor:publish --provider="A17\LaravelImage\LaravelImageServiceProvider" --tag=config
 ```
 
 ### JavaScript module
@@ -65,14 +74,14 @@ php artisan vendor:publish --provider="A17\LaravelImage\TwillImageServiceProvide
 You can import the JavaScript module and initialize the lazy loading class in your application.
 
 ```js
-import { TwillImage } from '../../vendor/area17/laravel-image'
+import { LaravelImage } from '../../vendor/area17/laravel-image'
 
 document.addEventListener('DOMContentLoaded', function () {
-  const lazyloading = new TwillImage()
+  const lazyloading = new LaravelImage()
 })
 ```
 
-When adding or refreshing content of a page without a reload, you can trigger a recalculation of TwillImage's observers by calling the `reset()` method. This is an example:
+When adding or refreshing content of a page without a reload, you can trigger a recalculation of LaravelImage's observers by calling the `reset()` method. This is an example:
 
 ```js
 document.addEventListener('page:updated', () => lazyloading.reset());
@@ -81,7 +90,7 @@ document.addEventListener('page:updated', () => lazyloading.reset());
 If you prefer to use a pre-compiled version of the JavaScrip module, you can publish a script `laravel-image.js` to your app's public folder and add a `<script>` tag to your project.
 
 ```bash
-php artisan vendor:publish --provider="A17\LaravelImage\TwillImageServiceProvider" --tag=js
+php artisan vendor:publish --provider="A17\LaravelImage\LaravelImageServiceProvider" --tag=js
 ```
 
 In a Blade file.
@@ -100,17 +109,19 @@ The JavaScript module is not required. If you prefer to rely only on the browser
 The `Image` model allows you to interact fluently with a media object.
 
 ```php
-$image = new A17\LaravelImage\Models\Image($object, $role, $media);
+$source = A17\LaravelImage\Sources\Twill\TwillMedia::make($object, $role, $media);
+
+$image = new A17\LaravelImage\Models\Image($source);
 
 // or using the Facade
-$image = TwillImage::make($object, $role, $media);
+$image = LaravelImage::make($source);
 ```
 
-|Argument|Type|Default|Description|
-|---|---|---|---|
-|`$object` (Required)|`A17\Twill\Models\Media` `A17\Twill\Models\Block` `object`|   |Your Twill module or block object|
-|`$role` (Required)|`string`|   |`Media` role|
-|`$media`|`A17\Twill\Models\Media`|`null`|`Media` instance|
+| Argument             | Type                                                       |Default|Description|
+|----------------------|------------------------------------------------------------|---|---|
+| `$object` (Required) | `A17\Twill\Models\Media` `A17\Twill\Models\Block` `object` |   |Your Twill module or block object|
+| `$role` (Required)   | `string`                                                   |   |`Media` role|
+| `$media`             | `A17\Twill\Models\Media`                                   |`null`|`Media` instance|
 
 #### Available methods
 
@@ -282,7 +293,8 @@ This method will return the rendered view.
 ```blade
 {{-- resources/views/home.blade.php --}}
 @php
-$image = TwillImage::make($page, 'preview')->preset('art_directed');
+$source = A17\LaravelImage\Sources\Twill\TwillMedia::make($page, 'preview');
+$image = LaravelImage::make($source)->preset('art_directed');
 @endphp
 
 {!! $image->render() !!}
@@ -299,7 +311,8 @@ $image = TwillImage::make($page, 'preview')->preset('art_directed');
 If you need to split the image generation from the render (exposing the `Image` model data through a REST API for example), use this method to get all attributes as an array.
 
 ```php
-$previewImage = TwillImage::make($page, 'preview')->preset('art_directed')->toArray();
+$source = A17\LaravelImage\Sources\Twill\TwillMedia::make($page, 'preview');
+$previewImage = LaravelImage::make($source)->preset('art_directed')->toArray();
 ```
 
 And use the `render` method from the facade to render the view.
@@ -307,7 +320,7 @@ And use the `render` method from the facade to render the view.
 ```blade
 {{-- resources/views/page.blade.php --}}
 
-<div>{!! TwillImage::render($previewImage) !!}</div>
+<div>{!! LaravelImage::render($previewImage) !!}</div>
 ```
 
 ### The facade `render` method
@@ -315,18 +328,19 @@ And use the `render` method from the facade to render the view.
 As seen in the previous section, the image element rendering can be separated from the image attributes generation. You can use the `Image` model to set up your image and pass the resulting object (or its `array` format to the `render` method to output the view).
 
 ```php
-$previewImage = TwillImage::make($page, 'preview')->toArray();
+$source = A17\LaravelImage\Sources\Twill\TwillMedia::make($page, 'preview');
+$previewImage = LaravelImage::make($source)->toArray();
 ```
 
 ```blade
-{!! TwillImage::render($previewImage) !!}
+{!! LaravelImage::render($previewImage) !!}
 ```
 
 or
 
 ```php
 <div class="w-1/4">
-    {!! TwillImage::render($previewImage, [
+    {!! LaravelImage::render($previewImage, [
         'layout' => 'constrained',
         'width' => 700,
     ]) !!}
@@ -350,23 +364,29 @@ or
 #### Examples
 
 ```blade
-{!! TwillImage::make($item, 'preview_image')->sizes('(max-width: 767px) 50vw, 100vw')->render(); !!}
+@php
+$source = A17\LaravelImage\Sources\Twill\TwillMedia::make($item, 'preview_image');
+@endphp
+{!! LaravelImage::make($source)->sizes('(max-width: 767px) 50vw, 100vw')->render(); !!}
 
 @php
-$heroImage = TwillImage::make($item, 'preview_image');
-$listingImage = TwillImage::make($item, 'preview_image')->crop('listing');
+$heroSource = A17\LaravelImage\Sources\Twill\TwillMedia::make($item, 'preview_image');
+$heroImage = LaravelImage::make($heroSource);
+
+$listingSource = A17\LaravelImage\Sources\Twill\TwillMedia::make($item, 'preview_image');
+$listingImage = LaravelImage::make($listingSource)->crop('listing');
 @endphp
 
-{!! TwillImage::render($heroImage) !!}
+{!! LaravelImage::render($heroImage) !!}
 
-{!! TwillImage::render($listingImage) !!}
+{!! LaravelImage::render($listingImage) !!}
 
-{!! TwillImage::render($listingImage, [
+{!! LaravelImage::render($listingImage, [
     'layout' => 'constrained',
     'width' => 400
 ]) !!}
 
-{!! TwillImage::render($listingImage, [
+{!! LaravelImage::render($listingImage, [
     'layout' => 'fixed',
     'width' => 100,
     'height' => 150
@@ -436,11 +456,12 @@ Let's say this is your preset `art_directed` in your config:
 
 ```blade
 @php
-$image = TwillImage::make($page, 'preview')->preset('art_directed');
+$source = A17\LaravelImage\Sources\Twill\TwillMedia::make($page, 'preview');
+$image = LaravelImage::make($source)->preset('art_directed');
 @endphp
 
 <div>
-    {!! TwillImage::render($image, [
+    {!! LaravelImage::render($image, [
         'class' => 'art-directed'
     ]) !!}
 </div>
@@ -564,13 +585,14 @@ This is an example when you have multiple medias attached to a single `role`.
 ```blade
 @php
 $galleryImages = $item->imageObjects('gallery_image', 'desktop')->map(function ($media) use ($item) {
-    return TwillImage::make($item, 'gallery_image', $media);
+    $source = A17\LaravelImage\Sources\Twill\TwillMedia::make($item, 'gallery_image', $media);
+    return LaravelImage::make($source);
 })->toArray();
 @endphp
 
 @if($galleryImages)
     @foreach($galleryImages as $image)
-        {!! TwillImage::render($image) !!}
+        {!! LaravelImage::render($image) !!}
     @endforeach
 @endif
 ```
