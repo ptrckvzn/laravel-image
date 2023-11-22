@@ -1,15 +1,15 @@
 <?php
 
-namespace A17\Twill\Image\Services;
+namespace A17\Twill\Image\Services\Twill;
 
+use A17\Twill\Image\Exceptions\ImageException;
+use A17\Twill\Image\Services\Interfaces\MediaSource;
 use A17\Twill\Models\Block;
 use A17\Twill\Models\Media;
 use A17\Twill\Models\Model;
-use A17\Twill\Image\Exceptions\ImageException;
 use A17\Twill\Services\MediaLibrary\ImageServiceInterface;
-use A17\Twill\Image\Services\Interfaces\MediaSource;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\App;
 
 class TwillMediaSource implements MediaSource
 {

@@ -111,12 +111,4 @@ return [
         'source' => public_path(),
         'base_path' => 'static',
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Classes
-    |--------------------------------------------------------------------------
-    */
-
-    'media_source_class' => \A17\Twill\Image\Services\TwillMediaSource::class,
 ];

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2d0fff341a5d5fdebdb754ee0c6145d1",
+    "content-hash": "57314520f82105bf78063e39e3760e7d",
     "packages": [
         {
             "name": "area17/twill",

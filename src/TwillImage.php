@@ -3,6 +3,7 @@
 namespace A17\Twill\Image;
 
 use A17\Twill\Image\Models\Image;
+use A17\Twill\Image\Services\Interfaces\MediaSource;
 use A17\Twill\Image\ViewModels\ImageViewModel;
 
 class TwillImage
@@ -13,17 +14,8 @@ class TwillImage
      * @param null $media
      * @return Image
      */
-    public function make($object, $role, $media = null, $service = null)
+    public function make(MediaSource $source): Image
     {
-        $mediaSourceClass = config('twill-image.media_source_class');
-
-        $source = new $mediaSourceClass(
-            $object,
-            $role,
-            $media,
-            $service
-        );
-
         return new Image($source);
     }
 

@@ -26,8 +26,7 @@
         "A17\\Twill\\Image\\TwillImageServiceProvider"
       ],
       "aliases": {
-        "TwillImage": "A17\\Twill\\Image\\Facades\\TwillImage",
-        "TwillStaticImage": "A17\\Twill\\Image\\Facades\\TwillStaticImage"
+        "TwillImage": "A17\\Twill\\Image\\Facades\\TwillImage"
       }
     }
   },
