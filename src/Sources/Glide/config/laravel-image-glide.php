@@ -17,9 +17,9 @@ return [
         'q' => '80',
         'fit' => 'max',
     ],
-//    'lqip_default_params' => [
-//        'fm' => 'gif',
-//        'blur' => 100,
-//        'dpr' => 1,
-//    ],
+    'lqip_default_params' => [
+        'fm' => 'gif',
+        'blur' => 100,
+        'dpr' => 1,
+    ],
 ];

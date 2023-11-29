@@ -88,6 +88,17 @@ class Glide
      * @param string $id
      * @return string
      */
+    public function getLqipUrl($id)
+    {
+        $lqipParams = config('laravel-image-glide.lqip_params');
+
+        $this->getUrl($id, $lqipParams);
+    }
+
+    /**
+     * @param string $id
+     * @return string
+     */
     private function getOriginalMediaUrl($id)
     {
         $originalMediaForExtensions = $this->config->get('laravel-image-glide.original_media_for_extensions');
